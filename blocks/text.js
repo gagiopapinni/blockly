@@ -226,6 +226,24 @@ Blockly.defineBlocksWithJsonArray([  // BEGIN JSON EXTRACT
   }
 ]);  // END JSON EXTRACT (Do not delete this comment.)
 
+Blockly.Blocks['text_limit_lines'] = {
+  init: function() {
+    this.appendDummyInput()
+        .appendField("Set maxLines config to  ")
+        .appendField(new Blockly.FieldNumber(5, 0), "MAX_LINES")
+        .appendField(new Blockly.FieldMultilineInput(), "TEXT");
+    this.setStyle('text_blocks');
+    this.setOutput(true, 'String')
+    this.setOnChange(function () {
+        var maxLines = this.getField("MAX_LINES").getValue();
+        var text = this.getField("TEXT");
+        if (text.getMaxLines() !== maxLines) {
+          text.setMaxLines(maxLines);
+        }
+    })
+  }
+};
+
 Blockly.Blocks['text_getSubstring'] = {
   /**
    * Block for getting substring.
